@@ -79,6 +79,7 @@ export default class Terminal{
             const searchString = affix + variable.name + affix;
 
             terminalTemplate = terminalTemplate.replace(searchString, variable.dataString)
+            terminalTemplate = terminalTemplate.replaceAll(`"`, ``);
         })
 
         Object.keys(COLORS).forEach((color:string) => {
