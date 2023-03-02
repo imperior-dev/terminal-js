@@ -15,6 +15,7 @@ export default class Terminal {
      */
     createVariable(name: string, data: any): Variable;
     update(): void;
+    removeColors(string: string): string;
 }
 declare class Variable {
     name: string;
