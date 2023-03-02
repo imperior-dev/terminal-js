@@ -74,7 +74,7 @@ export default class Terminal{
         if(!this.debug){
             this.update()
         } else{
-            console.log(name + ": " + data);
+            console.log(name + ": " + this.removeColors(data));
         }
         return variable
     }
@@ -100,7 +100,16 @@ export default class Terminal{
         console.clear();
         console.log(terminalTemplate + COLORRESETCODE);
     }
-}
+    removeColors(string:string){
+        string = string + ""
+        Object.keys(COLORS).forEach((color:string) => {
+            const affix = this._affix.color;
+            const searchString = affix + color + affix;
+            string = string.replaceAll(searchString, "")
+        });
+        return string
+    };
+};
 
 class Variable{
     name: string;
@@ -119,7 +128,7 @@ class Variable{
     set value(newData: any){
         this.data = newData
         if(this.terminal.debug){
-            console.log(this.name + ": " + this.data);
+            console.log(this.name + ": " + this.terminal.removeColors(newData));
         }   else{
             this.terminal.update()
         }
