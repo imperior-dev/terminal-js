@@ -43,6 +43,7 @@ export default class Terminal{
     private _terminalTemplate: string;
     private _variables: Array<Variable>;
     private _affix: Affix;
+    public debug: Boolean;
     /**
      * @param template Template for logging to the terminal, By default use "#variableName#" to add variable "@colorName@" to add colors
      * @param variableAffix Use this to change "#" in variable placeholder to any other value
@@ -57,6 +58,7 @@ export default class Terminal{
         global.essential["terminal"] = ()=> this
         this._terminalTemplate = template
         this._variables = []
+        this.debug = process.argv.includes("--debug");
         this._affix = {
             variable: variableAffix,
             color: colorAffix
@@ -69,7 +71,11 @@ export default class Terminal{
     createVariable(name:string, data: any){
         const variable = new Variable(name, data, this)
         this._variables.push(variable)
-        this.update()
+        if(!this.debug){
+            this.update()
+        } else{
+            console.log(name + ": " + data);
+        }
         return variable
     }
     update(){
@@ -112,7 +118,11 @@ class Variable{
 
     set value(newData: any){
         this.data = newData
-        this.terminal.update()
+        if(this.terminal.debug){
+            console.log(this.name + ": " + this.data);
+        }   else{
+            this.terminal.update()
+        }
     }
 
     get dataString(){

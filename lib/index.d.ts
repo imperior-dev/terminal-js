@@ -2,6 +2,7 @@ export default class Terminal {
     private _terminalTemplate;
     private _variables;
     private _affix;
+    debug: Boolean;
     /**
      * @param template Template for logging to the terminal, By default use "#variableName#" to add variable "@colorName@" to add colors
      * @param variableAffix Use this to change "#" in variable placeholder to any other value

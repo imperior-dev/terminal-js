@@ -1,13 +1,13 @@
 {
   "name": "@improved-javascript/terminal",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "lib/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "ts-node test/index.test.ts",
+    "test": "ts-node test/index.test.ts --debug",
     "build": "tsc -p ."
   },
   "repository": {
