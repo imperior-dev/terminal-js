@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 type ColorType = {
     [key: string]: number
 }
@@ -76,6 +74,7 @@ export default class Terminal{
         } else{
             console.log(name + ": " + this.removeColors(data));
         }
+        if(global.essential["logger"])  global.essential["logger"].log(name, data);
         return variable
     }
     update(){
@@ -126,7 +125,8 @@ class Variable{
     }
 
     set value(newData: any){
-        this.data = newData
+        if(global.essential["logger"])  global.essential["logger"].log(this.name, newData)
+        this.data = newData;
         if(this.terminal.debug){
             console.log(this.name + ": " + this.terminal.removeColors(newData));
         }   else{
